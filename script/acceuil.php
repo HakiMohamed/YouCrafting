@@ -1,3 +1,7 @@
+<?php   require '../config/connexion.php'; 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,12 +47,12 @@
 <section class="container my-5">
     <div class="row align-items-center">
 
-        <!-- Image (optionnel) -->
+        
         <div class="col-md-6 mb-4 mb-md-0">
-            <img src="./imgs/mw-articles-700px.jpg" class="img-fluid img-thumbnail " alt="Votre image ou logo">
+            <img src="../imgs/mw-articles-700px.jpg" class="img-fluid img-thumbnail " alt="imaged'acceuil">
         </div>
 
-        <!-- Texte de la section À propos -->
+        
         <div class="col-md-6">
             <h2 class="mb-4">À propos de nous</h2>
             <p class="lead">
@@ -56,6 +60,7 @@
             Bienvenue sur notre plateforme dédiée à la création et à la découverte d'articles inspirants et informatifs. Chez nous, l'écriture devient une porte ouverte à l'imagination, un espace où chaque passion, chaque idée, trouve sa place. Que vous soyez un créateur en herbe ou un lecteur avide de nouvelles découvertes, notre communauté dynamique vous invite à explorer, à partager et à enrichir cette bibliothèque virtuelle, façonnée par la diversité de vos expériences et de vos récits. Rejoignez-nous dans cette aventure littéraire où chaque mot compte et où chaque contribution est une pierre précieuse à l'édifice de la connaissance partagée.            </p>
             
             <a href="#" class="btn btn-primary mt-3 ">En savoir plus</a>
+            <a href="./insererArticle.php" class="btn btn-primary mt-3 ">Crée Votre article</a>
         </div>
 
     </div>
@@ -65,76 +70,44 @@
 
 <div class="container">
 <div class="col-md-12">
-        <!-- Contenu principal ici -->
-        <!-- Section Articles récents -->
-
+        
 
         <h2 class="mb-4">Articles</h2>
         <div class="row">
 
-          <!-- Article 1 -->
+            <?php   foreach($result as $row):    ?>
+          
           <div class="col-md-3 mt-3 mb-2">
-            <div class="card " >
-              <img src="./imgs/4.jpg" class="img-fluid img-thumbnail" alt="gfhj">
-              <div class="card-body">
-                <h5 class="card-title">La Dernière tempête</h5>
-                <p class="card-text">
-                « Ragnar Jónasson ne serait-il pas le meilleur auteur de romans policiers de notre époque ? »
-                </p>
-                <h6 class="card-title">L'auteur : <strong>med</strong></h6>
-                <h6 class="card-title">crée a : 2020/12/12</h6>
-                <a href="#" class="btn btn-primary">Lire plus</a>
+            <div class="card ">
+              <img src="../imgs/article-writing.jpg" class="img-fluid img-thumbnail" alt="gfhj">
+               <div class="card-body">
+                 <h5 class="card-title"><?=$row['titre']?></h5>
+                 <p class="card-text">
+                 <?=$row['contenu']?>
+                 </p>
+                 <h6 class="card-title">L'auteur : <strong>ksnapiz</strong></h6>
+                 <h6 class="card-title"></h6>
+                 <div class="d-flex ">
+                  <form method="POST" action="./traitement.php" >
+                  <input type="hidden" name="article_id" value="<?= $row['id'] ?>">
+                  <a href="./insererArticle.php?id=<?= $row['id'] ?>"  class="btn btn-outline-success ">update</a>
+                 <button  type="submit" name="delete" class="btn btn-outline-danger ">delete</button>
+                 <button type="submit" name="more" class="btn btn-outline-primary ">more</button>
+                 </form>
+                 
+               </div>
               </div>
             </div>
           </div>
+     <?php    endforeach;   ?>
+          
+        
 
-          <!-- Article 2 -->
-          <div class="col-md-3 mt-3 mb-2">
-            <div class="card">
-              <img src="./imgs/3.jpg" class="img-fluid img-thumbnail" alt="gfhj">
-              <div class="card-body">
-                <h5 class="card-title">La vie est un roman</h5>
-                <p class="card-text">
-                « Un jour d'avril, ma fille de trois ans, Carrie, a disparu alors que nous jouions toutes les deux à cache-cache dans mon appartement de Brooklyn. »                </p>
-                
-                <h6 class="card-title">L'auteur : <strong>med</strong></h6>
-                <h6 class="card-title">crée a : 2020/12/12</h6>
-                <a href="#" class="btn btn-primary">Lire plus</a>
-              </div>
-            </div>
-          </div>
+          
+          
 
-          <!-- Article 3 -->
-          <div class="col-md-3 mt-3 mb-2">
-            <div class="card">
-              <img src="./imgs/5.jpg" class="img-fluid img-thumbnail" alt="gfhj">
-              <div class="card-body">
-                <h5 class="card-title">Le Temps des chimères</h5>
-                <p class="card-text">
-                « Ragnar Jónasson ne serait-il pas le meilleur auteur de romans policiers de notre époque ? »
-                </p>
-                <h6 class="card-title">L'auteur : <strong>med</strong></h6>
-                <h6 class="card-title">crée a : 2020/12/12</h6>
-                <a href="#" class="btn btn-primary">Lire plus</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Article 4 -->
-          <div class="col-md-3 mt-3 mb-2">
-            <div class="card">
-              <img src="./imgs/6.jpg" class="img-fluid img-thumbnail" alt="gfhj">
-              <div class="card-body">
-                <h5 class="card-title">La Dernière tempête</h5>
-                <p class="card-text">
-                « Ragnar Jónasson ne serait-il pas le meilleur auteur de romans policiers de notre époque ? »
-                </p>
-                <h6 class="card-title">L'auteur : <strong>med</strong></h6>
-                <h6 class="card-title">crée a : 2020/12/12</h6>
-                <a href="#" class="btn btn-primary">Lire plus</a>
-              </div>
-            </div>
-          </div>
+          
+          
 
         </div>
 
